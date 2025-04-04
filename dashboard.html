@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mess Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>Mess Owner Dashboard</header>
+
+    <form id="menuForm">
+        <h2>Update Mess Menu</h2>
+        <input type="text" id="lunchMenu" placeholder="Lunch Menu" required>
+        <input type="text" id="dinnerMenu" placeholder="Dinner Menu" required>
+        <button type="button" onclick="updateMenu()">Update Menu</button>
+    </form>
+
+    <h2>Your Updated Mess Menus</h2>
+    <div id="updatedMessList"></div>
+
+    <button id="logoutBtn" onclick="logout()">Logout</button>
+    <button id="deleteAccountBtn" onclick="deleteAccount()">Delete Account</button>
+
+    <script>
+        let loggedInMessOwner = localStorage.getItem("loggedInMessOwner");
+
+        if (!loggedInMessOwner) {
+            alert("You are not logged in. Redirecting to login page.");
+            window.location.href = "login.html";
+        }
+
+        let messData = JSON.parse(localStorage.getItem("messData")) || [];
+        let users = JSON.parse(localStorage.getItem("users")) || []; // Store user accounts
+
+        function updateMenu() {
+            let lunchMenu = document.getElementById("lunchMenu").value.trim();
+            let dinnerMenu = document.getElementById("dinnerMenu").value.trim();
+
+            if (lunchMenu === "" || dinnerMenu === "") {
+                alert("Please fill all fields.");
+                return;
+            }
+
+            let existingMess = messData.find(mess => mess.owner === loggedInMessOwner);
+
+            if (existingMess) {
+                existingMess.menu.lunch = lunchMenu;
+                existingMess.menu.dinner = dinnerMenu;
+                existingMess.menu.lastUpdated = new Date().toLocaleString();
+            } else {
+                let messName = "Mess by " + loggedInMessOwner;
+                messData.push({
+                    owner: loggedInMessOwner,
+                    messName: messName,
+                    menu: {
+                        lunch: lunchMenu,
+                        dinner: dinnerMenu,
+                        lastUpdated: new Date().toLocaleString()
+                    }
+                });
+            }
+
+            localStorage.setItem("messData", JSON.stringify(messData));
+            alert("Menu updated successfully!");
+            displayUpdatedMenus();
+        }
+
+        function deleteMenu(index) {
+            if (confirm("Are you sure you want to delete this menu?")) {
+                messData.splice(index, 1);
+                localStorage.setItem("messData", JSON.stringify(messData));
+                displayUpdatedMenus();
+            }
+        }
+
+        function displayUpdatedMenus() {
+            let updatedMessList = document.getElementById("updatedMessList");
+            updatedMessList.innerHTML = "";
+
+            let filteredMess = messData.filter(mess => mess.owner === loggedInMessOwner);
+
+            if (filteredMess.length > 0) {
+                filteredMess.forEach((mess, index) => {
+                    updatedMessList.innerHTML += `
+                        <div class="mess">
+                            <h3>${mess.messName}</h3>
+                            <p><strong>Lunch:</strong> ${mess.menu.lunch}</p>
+                            <p><strong>Dinner:</strong> ${mess.menu.dinner}</p>
+                            <p class="last-updated"><em>Last Updated: ${mess.menu.lastUpdated}</em></p>
+                            <button class="deleteBtn" onclick="deleteMenu(${messData.indexOf(mess)})">Delete</button>
+                        </div>
+                    `;
+                });
+            } else {
+                updatedMessList.innerHTML = "<p>You have not updated any mess menu.</p>";
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem("loggedInMessOwner");
+            window.location.href = "index.html";
+        }
+
+        function deleteAccount() {
+            if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+                // Remove all menus of this mess owner
+                messData = messData.filter(mess => mess.owner !== loggedInMessOwner);
+                localStorage.setItem("messData", JSON.stringify(messData));
+
+                // Remove user from the user database
+                users = users.filter(user => user.username !== loggedInMessOwner);
+                localStorage.setItem("users", JSON.stringify(users));
+
+                // Remove login session
+                localStorage.removeItem("loggedInMessOwner");
+
+                alert("Your account has been deleted successfully.");
+                window.location.href = "index.html";
+            }
+        }
+
+        displayUpdatedMenus();
+    </script>
+</body>
+</html>

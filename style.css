@@ -1,0 +1,205 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Body Styling */
+body {
+    background-color: #F4F4F4;
+    color: #333;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    background: #FF7F00;
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    font-size: 26px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    background: #FF7F00;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s ease-in-out;
+    border: none;
+}
+
+.btn:hover {
+    background: #E67300;
+    transform: scale(1.05);
+}
+
+/* Home Page */
+main {
+    max-width: 900px;
+    margin: 30px auto;
+}
+
+h2 {
+    color: #FF7F00;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+/* Mess List */
+#messList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* Mess Cards */
+.mess {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease-in-out;
+}
+
+.mess:hover {
+    transform: scale(1.03);
+}
+
+.mess h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #FF7F00;
+}
+
+.mess p {
+    font-size: 18px;
+    color: #444;
+}
+
+/* Forms */
+form {
+    background: white;
+    padding: 25px;
+    max-width: 400px;
+    margin: 30px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border: 1px solid #DDDDDD;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+}
+
+input:focus {
+    outline: 2px solid #FF7F00;
+}
+
+button {
+    background: #FF7F00;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+button:hover {
+    background: #E67300;
+    transform: scale(1.05);
+}
+
+/* Dashboard Styling */
+#menuForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#logoutBtn {
+    background: red;
+    margin-top: 20px;
+}
+
+#logoutBtn:hover {
+    background: darkred;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #messList {
+        grid-template-columns: 1fr;
+    }
+
+    form {
+        width: 90%;
+    }
+}
+
+
+/* Delete Button */
+#deleteBtn {
+    background: red;
+    margin-top: 10px;
+}
+
+#deleteBtn:hover {
+    background: darkred;
+}
+
+/* Last Updated Text */
+.last-updated {
+    font-size: 14px;
+    color: gray;
+    margin-top: 10px;
+}
+
+
+/* Delete Button */
+.deleteBtn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-top: 10px;
+    width: 100%;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.deleteBtn:hover {
+    background: darkred;
+    transform: scale(1.05);
+}
+
+/* Last Updated Text */
+.last-updated {
+    font-size: 14px;
+    color: gray;
+    margin-top: 10px;
+}
