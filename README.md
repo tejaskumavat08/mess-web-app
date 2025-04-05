@@ -1,6 +1,6 @@
 # 🍽️ Aaj Ka Menu
 
-A simple, responsive web app for mess owners to share their daily lunch and dinner menus. Users can browse menus and search for messes by name. Mess owners can register, login, update their menus, and manage their mess details.
+A simple, responsive web app for mess owners to share their daily lunch and dinner menus. Users can browse menus and search for messes by name. Mess owners can register, login, update their menus, and manage their mess details. It is simpliy use local store to perform CRUD operations.
 
 ## ✨ Features
 
@@ -44,6 +44,9 @@ AajKaMenu/
 - Store menu data in a database
 - Admin panel for managing all messes
 - Ability to upload images/logos for messes
+
+## 📝 Note 
+ But currently this is not perfectly working on the mobile phones but it full usable for PC user. This is the trial version of the Aaj ka Menu if any update occur in future like a database connection such as firebase or updating with the MERN stack then all the update will be provided here only. Thank you for support and paitence STAY TUNED.
 
 ## 📄 License
 
